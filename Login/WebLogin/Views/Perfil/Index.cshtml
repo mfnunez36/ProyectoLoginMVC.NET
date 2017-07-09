@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Index";
+    List<DTO.PerfilDTO> lista = (List<DTO.PerfilDTO>)ViewBag.ListaPerfiles;
+}
+<section class="container">
+    <center><h2 class="page-header">PERFILES REGISTRADOS</h2></center>
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <a class="btn btn-primary" href="@Url.RouteUrl("Agregar_Perfil")">AGREGAR PERFIL</a>
+            <br /><br />
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <td><strong>ID</strong></td>
+                            <td><strong>TIPO</strong></td>
+                            <td><strong>DESCRIPCION</strong></td>
+                            <td><strong>VIGENTE</strong></td>
+                            <td><strong>OPCIONES</strong></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < lista.Count; i++)
+                        {
+                            <tr>
+                                <td>@lista[i].id</td>
+                                <td>@lista[i].tipo</td>
+                                <td>@lista[i].descripcion</td>
+                                <td>@lista[i].vigente</td>
+                                <td>
+                                    <a class="btn btn-default btn-sm" href="@Url.RouteUrl("Editar_Perfil", new { id = @lista[i].id })">EDITAR</a>
+                                    <a class="btn btn-danger btn-sm" type="submit" href="~/Perfil/Desactivar/@lista[i].id">ELIMINAR</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="">
+                <a class="btn btn-default" href="~/">VOLVER</a>
+            </div>
+        </div>
+    </div>
+</section>
