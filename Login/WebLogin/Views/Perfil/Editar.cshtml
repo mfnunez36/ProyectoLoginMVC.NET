@@ -1,0 +1,44 @@
+﻿@model DTO.PerfilDTO
+@{
+    ViewBag.Title = "Editar";
+}
+<section class="container">
+    <center><h2 class="page-header">EDITAR PERFIL</h2></center>
+
+    @using (Html.BeginForm("EditarPerfil", "Perfil", new { @class = "" }))
+    {
+        <div class="form-horizontal">
+            @Html.HiddenFor(model => model.id)
+            <div class="form-group">
+                <label class="col-md-2 control-label">TIPO</label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.tipo, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">DESCRIPCION</label>
+                <div class="col-md-4">
+                    @Html.TextAreaFor(model => model.descripcion, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">VIGENTE</label>
+                <div class="col-md-4">
+                    @Html.CheckBoxFor(model => model.vigente, new { @class = "" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-offset-4 col-md-8">
+                    <input class="btn btn-primary" type="submit" value="ACTUALIZAR" />
+                    <a class="btn btn-default" href="~/Perfil">VOLVER</a>
+                </div>
+            </div>
+        </div>
+    }
+
+
+</section>
+
