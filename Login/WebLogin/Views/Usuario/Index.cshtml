@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    List<DTO.UsuarioDTO> lista = (List<DTO.UsuarioDTO>)ViewBag.ListaUsuarios;
+}
+
+<section class="container">
+    <center><h2 class="page-header">USUARIOS REGISTRADOS</h2></center>
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <a class="btn btn-primary" href="@Url.RouteUrl("Agregar_Usuario")">AGREGAR USUARIO</a>
+            <br /><br />
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <td><strong>RUT</strong></td>
+                            <td><strong>NOMBRE</strong></td>
+                            <td><strong>APELLIDO</strong></td>
+                            <td><strong>FECHA NACIMIENTO</strong></td>
+                            <td><strong>CORREO</strong></td>
+                            <td><strong>TELEFONO</strong></td>
+                            <td><strong>VIGENTE</strong></td>
+                            <td><strong>OPCIONES</strong></td>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < lista.Count; i++)
+                        {
+                            <tr>
+                                <td>@lista[i].rut</td>
+                                <td>@lista[i].nombre</td>
+                                <td>@lista[i].apellido</td>
+                                <td>@lista[i].fecha_nac.ToShortDateString()</td>
+                                <td>@lista[i].correo</td>
+                                <td>@lista[i].telefono</td>
+                                <td>@lista[i].vigente</td>
+                                <td>
+                                    <a class="btn btn-default btn-sm" href="@Url.RouteUrl("Editar_Usuario", new { id = @lista[i].id })">EDITAR</a>
+                                    <a class="btn btn-danger btn-sm" type="submit" href="~/Usuario/Desactivar/@lista[i].id">ELIMINAR</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="">
+                <a class="btn btn-default" href="~/">VOLVER</a>
+            </div>
+        </div>
+    </div>
+</section>
+

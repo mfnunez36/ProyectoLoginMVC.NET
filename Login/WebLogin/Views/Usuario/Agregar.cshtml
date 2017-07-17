@@ -1,0 +1,98 @@
+﻿@model WebLogin.Models.UsuarioModel
+@{
+    ViewBag.Title = "Agregar";
+}
+
+<section class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <center><h2 class="page-header">AGREGAR USUARIO</h2></center>
+        </div>
+    </div>
+
+    @using (Html.BeginForm("Agregar", "Usuario", new { @class = "" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label class="col-md-2 control-label">RUT</label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.rut, new { @class = "form-control", placeholder = "RUT" })
+                    @Html.ValidationMessageFor(model => model.rut)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">NOMBRE</label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.nombre, new { @class = "form-control", placeholder = "NOMBRE" })
+                    @Html.ValidationMessageFor(model => model.nombre)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">APELLIDO</label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.apellido, new { @class = "form-control", placeholder = "APELLIDO" })
+                    @Html.ValidationMessageFor(model => model.apellido)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">FECHA DE NACIMIENTO</label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.fecha_nac, new { @Value = Model.fecha_nac.ToShortDateString(), @class = "form-control date-picker", @placeholder = "Ingrese Fecha", @id = "date-picker" })
+                    @Html.ValidationMessageFor(model => model.fecha_nac)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">CORREO</label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.correo, new { @class = "form-control", placeholder = "CORREO" })
+                    @Html.ValidationMessageFor(model => model.correo)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">CONTRASEÑA</label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.contraseña, new { @class = "form-control", @type = "password", placeholder = "CONTRASEÑA" })
+                    @Html.ValidationMessageFor(model => model.contraseña)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">TELEFONO</label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.telefono, new { @class = "form-control", placeholder = "TELEFONO" })
+                    @Html.ValidationMessageFor(model => model.telefono)
+                </div>
+            </div>
+
+
+            @*<div class="form-group">
+                    <label class="col-md-2 control-label">PERFILES</label>
+                    @for (int i = 0; i < Model.listaperfilmodel.Count; i++)
+                    {
+                        <div class="col-md-2">
+                            @Html.HiddenFor(model => model.listaperfilmodel[i].id)
+                            @Html.CheckBoxFor(model => model.listaperfilmodel[i].check, new { @checked = Model.listaperfilmodel[i].check })
+                            @Html.DisplayFor(model => model.listaperfilmodel[i].tipo)
+                        </div>
+                    }
+                </div>*@
+
+
+            <div class="row">
+                <div class="col-md-offset-4 col-md-8">
+                    <input class="btn btn-primary" type="submit" value="AGREGAR" />
+                    <a class="btn btn-default" href="~/Usuario">VOLVER</a>
+                </div>
+
+            </div>
+        </div>
+    }
+</section>

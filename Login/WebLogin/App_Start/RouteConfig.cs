@@ -36,6 +36,24 @@ namespace WebLogin
                 url: "Perfil/Agregar",
                 defaults: new { controller = "Perfil", action = "Agregar", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "Listar_Usuarios",
+                url: "Perfil",
+                defaults: new { controller = "Usuario", action = "Index", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "Editar_Usuario",
+                url: "Perfil/Editar/{id}",
+                defaults: new { controller = "Usuario", action = "Editar", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "Agregar_Usuario",
+                url: "Perfil/Agregar",
+                defaults: new { controller = "Usuario", action = "Agregar", id = UrlParameter.Optional }
+            );
         }
     }
 }
