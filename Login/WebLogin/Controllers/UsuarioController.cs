@@ -9,6 +9,7 @@ namespace WebLogin.Controllers
 {
     public class UsuarioController : Controller
     {
+        private UsuarioBO UsuarioBO = new UsuarioBO();
         // GET: Usuario
         public ActionResult Index()
         {
@@ -33,7 +34,6 @@ namespace WebLogin.Controllers
         [HttpPost]
         public ActionResult Agregar(UsuarioModel usuariomodel)
         {
-            UsuarioBO usuarioBO = new UsuarioBO();
             UsuarioDTO usu = new UsuarioDTO();
 
             try
@@ -49,7 +49,7 @@ namespace WebLogin.Controllers
                     usu.telefono = (int)usuariomodel.telefono;
                     usu.vigente = true;
 
-                    usuarioBO.AgregarUsuario(usu);
+                    UsuarioBO.AgregarUsuario(usu);
 
                     return RedirectToAction("Index", "Usuario");
                 }
@@ -68,10 +68,9 @@ namespace WebLogin.Controllers
         public ActionResult Editar(int id)
         {
             UsuarioModel usuariomodel = new UsuarioModel();
-            UsuarioBO usuBO = new UsuarioBO();
             UsuarioDTO usu = new UsuarioDTO();
 
-            usu = usuBO.UsuarioByID(id);
+            usu = UsuarioBO.UsuarioByID(id);
 
             ViewBag.usumodel = usuariomodel;
 
@@ -81,7 +80,6 @@ namespace WebLogin.Controllers
         [HttpPost]
         public ActionResult Editar(UsuarioModel usuariomodel)
         {
-            UsuarioBO usuBO = new UsuarioBO();
             UsuarioDTO usu = new UsuarioDTO();
 
             usu.id = usuariomodel.id;
@@ -94,18 +92,46 @@ namespace WebLogin.Controllers
             usu.telefono = (int)usuariomodel.telefono;
             usu.vigente = usuariomodel.vigente;
 
-            usuBO.EditarUsuario(usu);
+            UsuarioBO.EditarUsuario(usu);
 
             return RedirectToAction("Index", "Usuario");
         }
 
         public ActionResult Desactivar(int id)
         {
-            UsuarioBO usuBO = new UsuarioBO();
-
-            usuBO.EliminarUsuario(id);
+            UsuarioBO.EliminarUsuario(id);
 
             return RedirectToAction("Index", "Usuario");
+        }
+
+        public ActionResult RegistrarUsuario(UsuarioModel usuariomodel)
+        {
+            UsuarioDTO usu = new UsuarioDTO();
+
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    usu.rut = usuariomodel.rut;
+                    usu.nombre = usuariomodel.nombre;
+                    usu.apellido = usuariomodel.apellido;
+                    usu.fecha_nac = usuariomodel.fecha_nac;
+                    usu.contraseña = usuariomodel.contraseña;
+                    usu.correo = usuariomodel.correo;
+                    usu.telefono = (int)usuariomodel.telefono;
+                    usu.vigente = true;
+
+                    UsuarioBO.AgregarUsuario(usu);
+
+                    return RedirectToAction("Index", "Usuario");
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return View(usuariomodel);
         }
     }
 }
