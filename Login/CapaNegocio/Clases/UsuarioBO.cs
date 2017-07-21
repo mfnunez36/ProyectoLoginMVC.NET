@@ -37,5 +37,10 @@ namespace CapaNegocio
         {
             return usuarioperfilDal.AgregarUsuarioPerfil(id_perfil);
         }
+
+        public UsuarioDTO LogIn(string correo, string contraseña)
+        {
+            return usuarioDal.LogIn(correo, contraseña);
+        }
     }
 }

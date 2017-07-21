@@ -189,5 +189,33 @@ namespace CapaDatos
             return resultado;
 
         }
+
+        public UsuarioDTO LogIn(string correo, string contraseña)
+        {
+            var Usuario = new UsuarioDTO();
+
+            using (SqlConnection conn = ConexionDAL.SQLconnCanchas())
+            {
+                using (SqlCommand comando = new SqlCommand("Usuario_Login", conn))
+                {
+                    comando.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    comando.Parameters.Add(new SqlParameter("@correo", correo));
+                    comando.Parameters.Add(new SqlParameter("@contraseña", contraseña));
+
+                    using (var read = comando.ExecuteReader())
+                    {
+                        read.Read();
+                        if (read.HasRows)
+                        {
+                            Usuario.id = Convert.ToInt32(read["id"]);
+                            Usuario.nombre = Convert.ToString(read["Nombre"]);
+                        }
+                    }
+                }
+            }
+
+            return Usuario;
+        }
     }
 }
